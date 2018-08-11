@@ -7,6 +7,7 @@ bot = commands.Bot(description='', command_prefix=commands.when_mentioned_or('!'
 @bot.event
 async def on_ready():
     print('Ready')
+    bot.load_extension('Music')
     
 '''On all commands the bit after the def is the thing you type after the prefix. All commands need ctx in the ().
 The * means that when you type more than one word after the command in Discord it will be counted as one argument.
