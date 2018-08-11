@@ -18,7 +18,7 @@ async def say(ctx, *, words):
   await ctx.send(words)
   
   
-@bot.commands()
+@bot.command()
 async def kick(ctx, member: discord.Member, *, reason):
   await member.kick(reason=reason)
   em = discord.Embed(title='Kick', colour=0xff0000)
