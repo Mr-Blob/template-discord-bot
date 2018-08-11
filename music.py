@@ -15,13 +15,10 @@ YT_DL_OPTS = {
 class Music:
     def __init__(self, bot):
         self.bot = bot
-		self._queue = []
-		self._start_next_track_event = asyncio.Event()
 
 	@commands.command(alias='connect')
 	async def join(self, ctx):
-        self.bot.voice = await ctx.author.voice.channel.connect(timeout=60.0, reconnect=False
-		self._start_next_track_event.clear()
+        self.bot.voice = await ctx.author.voice.channel.connect(timeout=60.0, reconnect=False)
         if self.bot.voice.is_connected():
             await ctx.send(f'Joined {ctx.author.voice.channel.name}')
 
@@ -33,16 +30,9 @@ class Music:
 	@commands.command(alias='disconnect')
 	async def leave(self, ctx):
 		self.bot.voice.disconnect()
-		self.queue = []
 
     @commands.command()
     async def play(self, ctx, *, search):
-        self.queue.append(search)
-		self._start_next_track_event.clear()
-		await self._play()
-		await self._start_next_track_event.wait()
-
-	async def _play(self, ctx):
         if self.bot.voice.is_connected():
             downloader = youtube_dl.YoutubeDL(YT_DL_OPTS)
             info = downloader.extract_info(self.queue.pop(0), download=False)
@@ -55,7 +45,7 @@ class Music:
 
             ffmpeg_player = discord.FFmpegPCMAudio(url)
 
-            self.bot.voice.play(ffmpeg_player, after=lambda error: self._start_next_track_event.set())
+            self.bot.voice.play(ffmpeg_player)
             await ctx.send(f'Now Playing {title}')
 
 
@@ -72,22 +62,6 @@ class Music:
 			await self.bot.voice.resume()
 		else:
 			await ctx.send('I am not paused...')
-
-	@commands.command()
-	async def stop(self, ctx):
-		if self.bot.voice.is_playing() and or self.bot.voice.is_paused():
-			await self.bot.voice.stop()
-			self.queue = []
-
-	@commands.command(alias='list')
-	async def queue(self, ctx):
-		em = discord.Embed(name='Queue', colour)
-		for i in self.queue:
-			em.add_field(name=self.queue.index(i), value=i)
-
-	@commands.command()
-	async def skip(self, ctx):
-		self._start_next_track_event.set()
 
 def setup(bot):
     bot.add_cog(Music(bot))
