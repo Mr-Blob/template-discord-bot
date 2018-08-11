@@ -14,6 +14,9 @@ Right, now I need you to open up cmd.exe
 
 Once in there type this command: python -m pip install -U git+https://github.com/rapptz/discord.py@rewrite
 
+If you want the music to work: python -m pip install -U youtube_dl
+And install OPUS
+
 After you have done this what I need you to do is Download the files of this page. Theres a green button at the top. Just click it, and press Download ZIP. Unzip the files and put them where you want.
 
 
