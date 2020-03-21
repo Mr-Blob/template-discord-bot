@@ -5,14 +5,9 @@ Go to: https://www.python.org/ftp/python/3.7.0/python-3.7.0.exe
 When you first run that .exe make sure to look at the bottom and tick the box that says about adding it the PATH this is very important.
 Then just click the top install.
 
-Unfortunatly I need you to also install git. You can uninstall this later though.
-https://git-scm.com/download/win
-You can just click next one everything.
-
-
 Right, now I need you to open up cmd.exe
 
-Once in there type this command: python -m pip install -U git+https://github.com/rapptz/discord.py@rewrite
+Once in there type this command: python -m pip install -U discord.py
 
 If you want the music to work: python -m pip install -U youtube_dl
 And install OPUS
